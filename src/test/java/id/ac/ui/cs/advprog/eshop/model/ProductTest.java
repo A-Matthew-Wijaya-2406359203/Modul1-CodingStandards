@@ -28,4 +28,9 @@ class ProductTest {
     void testGetProductQuantity() {
         assertEquals(100, this.product.getProductQuantity());
     }
+
+    @Test
+    void testProductNameMismatch() {
+        assertNotEquals("Sampo Cap Badak", this.product.getProductName());
+    }
 }
