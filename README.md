@@ -26,3 +26,15 @@ Ketika berbicara tentang code coverage, saya teringat dengan unit testing di mat
 Jika kita membuat test baru, seperti COUNTProductFunctionalTest.java dan menggunakan requirements dari CreateProductFuctionalTest.java, akan adanya duplikasi code yang terjadi. Hal ini menyebabkan jika setupnya diganti, perbaikan yang harus dilakukan harus dilakukan 2 kali atau bahkan lebih jika ada lebih banyak test yang diterapkan dengan sistem yang sama. Readability dari testnya juga akan berkurang karena orang akan teroverwhelmed terlebih dahulu dengan apa yang ditampilkan di awal dengan requirements yang ada. 
 
 Improvement dapat dilakukan dengan membuat Base Test Class yang menghandle setupnya, setelah itu setiap test lain yang membutuhkan resource yang sama bisa mengextend Base tersebut sehingga setiap filenya hanya memiliki test logicnya dan bukan sesuatu yang repetitif. 
+
+***
+# Refleksi Modul 2
+
+1. Selama melakukan exercise, saya menemukan dan telah memperbaiki UnnecessaryModifier code warning yang ditunjukan oleh code scanner PMD.  
+Hal ini terjadi di ProductService.java, methods yang saya implemen di dalam interface java sudah secara otomatis dalam bentuk public dan abstract, pelabelan dengan abstract lagi menjadi redundan.  
+Oleh karena itu, saya melakukan perbaikan dengan menghilangkan kata-kata public dari methods yang ada, sehingga clean code dapat diterapkan dan penggunaan kode yang redundan berhsil dikurangi.
+2. Ya, implementasi sekarang telah berhasil memenuhi definisi dari Continous Integration dan juga Deployment.  
+Di bagian Continous Integration, beberapa workflow seperti ci.yml, pmd.yml, dan scorecard.yml telah berhasil diterapkan dan secara otomatis dijalankan setiap adanya pull dan push request.  
+Fungsi dari workflow tersebut adalah untuk mengecek code yang ada, merun unit test yang sudah dibuat, dan memverifikasi unit test tersebut dengan JaCoCo, juga menerapkan analisis keamanan dan kualitas.  
+Sleain itu, untuk CD atau Continous Deployment, ada deploy.yml yang secara otomatis dijalankan setiap terjadi push di branch, workflow tersebut akan mengeksekusi langkah-langkah untuk membuild aplikasi dan mendeploynya ke Koyeb.  
+Langkah ini membuat codenya akan selalu running tanpa membutuhkan andil dari manusia dan memenuhi CD.
