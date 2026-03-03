@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ProductRepositoryTest {
 
     @InjectMocks
-    ProductRepository productRepository;
+    ProductRepositoryImpl productRepository;
 
     @BeforeEach
     void setUp() {
@@ -110,7 +110,7 @@ class ProductRepositoryTest {
         updatedProduct.setProductName("Updated Name");
         updatedProduct.setProductQuantity(20);
 
-        Product result = productRepository.edit(updatedProduct);
+        Product result = productRepository.update(updatedProduct);
 
         assertNotNull(result);
         assertEquals("Updated Name", result.getProductName());
@@ -128,7 +128,7 @@ class ProductRepositoryTest {
         unregisteredProduct.setProductName("Ghost Product");
         unregisteredProduct.setProductQuantity(0);
 
-        Product result = productRepository.edit(unregisteredProduct);
+        Product result = productRepository.update(unregisteredProduct);
         assertNull(result);
     }
 

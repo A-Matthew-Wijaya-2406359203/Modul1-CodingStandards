@@ -50,7 +50,6 @@ class ProductServiceImplTest {
 
     @Test
     void testFindAll() {
-        // Setup mock data
         List<Product> productList = new ArrayList<>();
         Product product1 = new Product();
         product1.setProductId("test-id-1");
@@ -64,7 +63,6 @@ class ProductServiceImplTest {
 
         List<Product> result = productService.findAll();
 
-        // Verify the results
         assertEquals(2, result.size());
         assertEquals(product1.getProductId(), result.get(0).getProductId());
         assertEquals(product2.getProductId(), result.get(1).getProductId());
@@ -93,16 +91,16 @@ class ProductServiceImplTest {
         product.setProductId("test-id-1");
         product.setProductName("Updated Name");
 
-        productService.edit(product);
+        productService.update(product);
 
-        verify(productRepository, times(1)).edit(product);
+        verify(productRepository, times(1)).update(product);
     }
 
     @Test
     void testDelete() {
         String productId = "test-id-1";
 
-        productService.delete(productId);
+        productService.deleteById(productId); // Updated from delete()
 
         verify(productRepository, times(1)).delete(productId);
     }
