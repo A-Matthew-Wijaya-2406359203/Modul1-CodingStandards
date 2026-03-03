@@ -38,3 +38,23 @@ Di bagian Continous Integration, beberapa workflow seperti ci.yml, pmd.yml, dan 
 Fungsi dari workflow tersebut adalah untuk mengecek code yang ada, merun unit test yang sudah dibuat, dan memverifikasi unit test tersebut dengan JaCoCo, juga menerapkan analisis keamanan dan kualitas.  
 Sleain itu, untuk CD atau Continous Deployment, ada deploy.yml yang secara otomatis dijalankan setiap terjadi push di branch, workflow tersebut akan mengeksekusi langkah-langkah untuk membuild aplikasi dan mendeploynya ke Koyeb.  
 Langkah ini membuat codenya akan selalu running tanpa membutuhkan andil dari manusia dan memenuhi CD.
+
+***
+# Modul 3
+
+1. Single Responsibility Principle
+Di kode hasil modifikasi, saya sudah menerapkan SRP dengan memodifikasi ProductController yang tadinya memiliki dua class berbeda, ProductController dan CarController.
+Saya memisahkan kedua file dengan membuatkan file baru untuk CarController, sehingga setiap controller class memiliki tanggung jawab menghandle HTTP request untuk product maupun car.
+2. Open Closed Principle
+Di kode awal, ProductServiceImpl dan CarServiceImpl bergantung kepada concrete class ProductRepository dan CarRepository. 
+Ketika nanti ada perubahan, harus ada perubahan di setiap file yang membuatnya sulit untuk diubah. Oleh karena itu, saya mengubah ProductRepository dan CarRepository menjadi interfaces. 
+Kemudian, dibuatkan implementasinya berupa ProductRepositoryImpl dan CarRepositoryImpl untuk menghandle bentuk data saatini.
+3. Liskov Substitution Principle
+CarController yang awalnya mengextend ProductController tidak bisa mensubstitusi parentnya, selain itu dengan mengextend, ada endpoints yang juga ikut terbawa seperti /product/create padahal yang kita gunakan saat ini adalah untuk Cars. 
+Maka dari itu, saya menghilangkan relationship tersebut dan membuatnya menjadi sebuah class sendiri.
+4. Interface Segregation Principle
+Kode awal sebelum diubah sudah menerapkan CarService dan productService. 
+Namun beberapa nama yang diubah berbeda, sehingga saya melakuakn standarisasi supaya meskipun sudah di segregate, nama-nama methodnya distandarisasi supaya mudah diimplemen.
+5. Dependency Inversion Principle
+CarController sebelumnya bergantung pada CarServiceImpl yang merupakan concrete class.
+Saya mengubahnya menjadi bergantung pada abstraction berupa CarService, sehingga DIP sudah diterapkan.
