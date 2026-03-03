@@ -58,3 +58,16 @@ Namun beberapa nama yang diubah berbeda, sehingga saya melakuakn standarisasi su
 5. Dependency Inversion Principle
 CarController sebelumnya bergantung pada CarServiceImpl yang merupakan concrete class.
 Saya mengubahnya menjadi bergantung pada abstraction berupa CarService, sehingga DIP sudah diterapkan.
+
+### Manfaat SOLID
+Dengan menerapkan SOLID principle, program bisa lebih terbuka terhadap perubahan dan dimengerti oleh coder lain.
+Misalnya, dengan menerapkan OCP, aplikasi yang dicode akan lebih mudah beradaptasi dengan kebutuhan baru dan lebih sedikit code yang harus diubah.
+Selain itu, proses pembetulan bug (debugging) juga akan lebih mudah dilakukan karena diterapkan SRP yang akan mengisolasi bug sehingga mudah dicari code mana yang harus diperbaiki.
+Penamaan yang konsisten dengan interface juga membuat jika kita bekerja sama dengan programmer lain ataupun diri sendiri lebih mudah karena penamaan yang konsisten.
+
+### Apa yang terjadi jika tidak menerapkan?
+Yang terjadi jika tidak menerapkan SOLID adalah kebalikan dari apa yang sudah dijelaskan di atas.
+Ketika terjadi error, kita akan susah menemukan penyebabnya karena banyak ketergantungan. 
+Di sisi lain, ketika kita ingin mengubah tujuan atau scale dari code kita, kita akan sulit juga melakukannya karena banyak code yang harus diubah dan tidak mudah disesuaikan.
+Di sisi testing juga, ketika kita punya satu function yang sangat besar instead of function yang kecil, atau dependency ke concrete class, ketika dependency itu kita ubah, maka dependeenya juga akan terpengaruh.
+Kita menjadi harus membuat strukturnya dari awal dan tidak bisa membuat struktur pengganti baru dengan mudah.
