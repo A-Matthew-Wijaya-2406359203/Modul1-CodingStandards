@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Find Payment</title>
+</head>
+<body>
+<h2>Check Payment Detail</h2>
+<form onsubmit="window.location.href='/payment/detail/' + document.getElementById('paymentId').value; return false;">
+    <label for="paymentId">Payment ID:</label>
+    <input type="text" id="paymentId" required>
+    <button type="submit">Search</button>
+</form>
+</body>
+</html>
