@@ -2,6 +2,7 @@ package id.ac.ui.cs.advprog.eshop.controller;
 
 import id.ac.ui.cs.advprog.eshop.model.Order;
 import id.ac.ui.cs.advprog.eshop.model.Payment;
+import id.ac.ui.cs.advprog.eshop.model.Product; // Import ditambahkan
 import id.ac.ui.cs.advprog.eshop.service.OrderService;
 import id.ac.ui.cs.advprog.eshop.service.PaymentService;
 import org.junit.jupiter.api.BeforeEach;
@@ -69,7 +70,14 @@ class OrderControllerTest {
 
     @Test
     void testPayOrderForm() throws Exception {
-        Order order = new Order("order-1", new ArrayList<>(), 1000L, "Bambang");
+        List<Product> products = new ArrayList<>();
+        Product product = new Product();
+        product.setProductId("1");
+        product.setProductName("Test Product");
+        product.setProductQuantity(1);
+        products.add(product);
+
+        Order order = new Order("order-1", products, 1000L, "Bambang");
         when(orderService.findById("order-1")).thenReturn(order);
 
         mockMvc.perform(get("/order/pay/order-1"))
@@ -80,7 +88,14 @@ class OrderControllerTest {
 
     @Test
     void testPayOrderPost() throws Exception {
-        Order order = new Order("order-1", new ArrayList<>(), 1000L, "Bambang");
+        List<Product> products = new ArrayList<>();
+        Product product = new Product();
+        product.setProductId("1");
+        product.setProductName("Test Product");
+        product.setProductQuantity(1);
+        products.add(product);
+
+        Order order = new Order("order-1", products, 1000L, "Bambang");
         Payment payment = new Payment("pay-1", "VOUCHER_CODE", new HashMap<>(), order);
 
         when(orderService.findById("order-1")).thenReturn(order);

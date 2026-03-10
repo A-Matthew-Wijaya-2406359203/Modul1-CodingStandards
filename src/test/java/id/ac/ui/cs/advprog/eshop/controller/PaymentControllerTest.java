@@ -2,6 +2,7 @@ package id.ac.ui.cs.advprog.eshop.controller;
 
 import id.ac.ui.cs.advprog.eshop.model.Order;
 import id.ac.ui.cs.advprog.eshop.model.Payment;
+import id.ac.ui.cs.advprog.eshop.model.Product; // Import ditambahkan
 import id.ac.ui.cs.advprog.eshop.service.PaymentService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,6 +15,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -29,10 +31,21 @@ class PaymentControllerTest {
     @InjectMocks
     private PaymentController paymentController;
 
+    private Order order;
+
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
         mockMvc = MockMvcBuilders.standaloneSetup(paymentController).build();
+
+        List<Product> products = new ArrayList<>();
+        Product product = new Product();
+        product.setProductId("1");
+        product.setProductName("Test Product");
+        product.setProductQuantity(1);
+        products.add(product);
+
+        order = new Order("1", products, 100L, "A");
     }
 
     @Test
@@ -44,7 +57,7 @@ class PaymentControllerTest {
 
     @Test
     void testPaymentDetailById() throws Exception {
-        Payment payment = new Payment("pay-1", "VOUCHER_CODE", new HashMap<>(), new Order("1", new ArrayList<>(), 100L, "A"));
+        Payment payment = new Payment("pay-1", "VOUCHER_CODE", new HashMap<>(), order); // Gunakan order dummy
         when(paymentService.getPayment("pay-1")).thenReturn(payment);
 
         mockMvc.perform(get("/payment/detail/pay-1"))
@@ -65,7 +78,7 @@ class PaymentControllerTest {
 
     @Test
     void testAdminDetail() throws Exception {
-        Payment payment = new Payment("pay-1", "VOUCHER_CODE", new HashMap<>(), new Order("1", new ArrayList<>(), 100L, "A"));
+        Payment payment = new Payment("pay-1", "VOUCHER_CODE", new HashMap<>(), order); // Gunakan order dummy
         when(paymentService.getPayment("pay-1")).thenReturn(payment);
 
         mockMvc.perform(get("/payment/admin/detail/pay-1"))
@@ -76,7 +89,7 @@ class PaymentControllerTest {
 
     @Test
     void testAdminSetStatus() throws Exception {
-        Payment payment = new Payment("pay-1", "VOUCHER_CODE", new HashMap<>(), new Order("1", new ArrayList<>(), 100L, "A"));
+        Payment payment = new Payment("pay-1", "VOUCHER_CODE", new HashMap<>(), order); // Gunakan order dummy
         when(paymentService.getPayment("pay-1")).thenReturn(payment);
 
         mockMvc.perform(post("/payment/admin/set-status/pay-1")
