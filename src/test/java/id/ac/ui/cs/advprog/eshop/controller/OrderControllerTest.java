@@ -93,4 +93,13 @@ class OrderControllerTest {
                 .andExpect(model().attributeExists("paymentId"))
                 .andExpect(view().name("order/orderPaySuccess"));
     }
+
+    @Test
+    void testCreateOrderPost() throws Exception {
+        when(orderService.createOrder(any(Order.class))).thenReturn(null);
+
+        mockMvc.perform(post("/order/create").param("author", "Bambang"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/order/history"));
+    }
 }

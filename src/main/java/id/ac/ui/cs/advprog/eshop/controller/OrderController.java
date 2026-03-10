@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
+import id.ac.ui.cs.advprog.eshop.model.Product;
+import java.util.ArrayList;
+import java.util.UUID;
+
 @Controller
 @RequestMapping("/order")
 public class OrderController {
@@ -56,5 +60,21 @@ public class OrderController {
         Payment payment = paymentService.addPayment(order, method, allParams);
         model.addAttribute("paymentId", payment.getId());
         return "order/orderPaySuccess";
+    }
+
+    @PostMapping("/create")
+    public String createOrderPost(@RequestParam String author) {
+        // Kita membuat dummy product karena Order tidak boleh memiliki list produk kosong
+        List<Product> products = new ArrayList<>();
+        Product dummyProduct = new Product();
+        dummyProduct.setProductId("prod-dummy");
+        dummyProduct.setProductName("Dummy Item for Order");
+        dummyProduct.setProductQuantity(1);
+        products.add(dummyProduct);
+
+        Order order = new Order(UUID.randomUUID().toString(), products, System.currentTimeMillis(), author);
+        orderService.createOrder(order);
+
+        return "redirect:/order/history";
     }
 }

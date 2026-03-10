@@ -5,8 +5,16 @@
     <title>Create Order</title>
 </head>
 <body>
-<h2>Create Order</h2>
-<p>Form to create order goes here...</p>
+<h2>Create New Order</h2>
+
+<form th:action="@{/order/create}" method="post">
+    <label for="author">Your Name (Author):</label>
+    <input type="text" id="author" name="author" placeholder="e.g., Bambang" required>
+    <br><br>
+    <button type="submit">Create Order</button>
+</form>
+
+<br>
 <a href="/">Back to Home</a>
 </body>
 </html>
