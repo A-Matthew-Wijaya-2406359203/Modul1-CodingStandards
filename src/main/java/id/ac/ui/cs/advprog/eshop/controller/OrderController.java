@@ -35,8 +35,8 @@ public class OrderController {
     @PostMapping("/history")
     public String showHistory(@RequestParam String author, Model model) {
         List<Order> orders = orderService.findAllByAuthor(author);
-        model.setAttribute("orders", orders);
-        model.setAttribute("author", author);
+        model.addAttribute("orders", orders); // Change to addAttribute
+        model.addAttribute("author", author); // Change to addAttribute
         return "order/orderHistory";
     }
 
