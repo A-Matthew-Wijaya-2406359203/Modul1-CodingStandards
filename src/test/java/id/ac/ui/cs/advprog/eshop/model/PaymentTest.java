@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,8 +15,15 @@ class PaymentTest {
 
     @BeforeEach
     void setUp() {
+        List<Product> products = new ArrayList<>();
+        Product product = new Product();
+        product.setProductId("1");
+        product.setProductName("Test Product");
+        product.setProductQuantity(1);
+        products.add(product);
+
         order = new Order("13652556-012a-4c07-b546-54eb1396d79b",
-                new ArrayList<>(), 1000L, "Bambang");
+                products, 1000L, "Bambang");
     }
 
     @Test
